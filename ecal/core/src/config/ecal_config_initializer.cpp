@@ -261,9 +261,7 @@ namespace eCAL
       InitFromFile(g_default_ini_file);
     }
 
-    Configuration::Configuration()
-    {
-    }
+    Configuration::Configuration() = default;
 
     std::string Configuration::GetYamlFilePath()
     {
