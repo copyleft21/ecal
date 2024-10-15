@@ -64,32 +64,27 @@ This project has dependencies - list with dependency name and license follows.
 
 2.3 Utilities
 
-2.3.1 SimpleIni
-  - Copyright (c) 2006-2013 Brodie Thiesfield
-  - URL: https://github.com/brofield/simpleini
-  - License: MIT License - https://github.com/brofield/simpleini/blob/master/LICENCE.txt
-
-2.3.2 TCLAP
+2.3.1 TCLAP
   - Copyright (c) 2003 Michael E. Smoot 
   - Copyright (c) 2004 Daniel Aarno
   - Copyright (c) 2017 Google Inc.
   - URL: http://tclap.sourceforge.net
   - License: MIT License - https://opensource.org/licenses/mit-license.php
   
-2.3.3 convert_utf.cpp/.h
+2.3.2 convert_utf.cpp/.h
  - Copyright 2001-2004 Unicode, Inc.
 
-2.3.4 Spdlog
+2.3.3 Spdlog
   - Copyright (c) 2016 Gabi Melman
   - URL: https://github.com/gabime/spdlog
   - License: MIT License - https://github.com/gabime/spdlog/blob/v1.x/LICENSE
 
-2.3.5 Termcolor
+2.3.4 Termcolor
   - Copyright (c) 2013, Ihor Kalnytskyi
   - URL: https://github.com/ikalnytskyi/termcolor
   - License: BSD License - https://github.com/ikalnytskyi/termcolor/blob/master/LICENSE
 
-2.3.6 modpath.iss
+2.3.5 modpath.iss
   - Copyright (c) Jared Breland
   - URL: http://www.legroom.net/software
   - License: LGPL 3
