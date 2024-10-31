@@ -646,3 +646,55 @@ TEST(core_cpp_pubsub, SubscriberReconnection)
   // without destroying any pub / sub
   eCAL::Finalize();
 }
+
+TEST(core_cpp_pubsub, PublishFromReceiveCB)
+{
+  // initialize eCAL API
+  eCAL::Initialize(0, nullptr, "PublishFromReceiveCB");
+
+  // enable loop back communication in the same thread
+  eCAL::Util::EnableLoopback(true);
+
+  eCAL::string::CPublisher<std::string> pub_a("PairA");
+  eCAL::string::CSubscriber<std::string> sub_a("PairA");
+
+  eCAL::string::CPublisher<std::string> pub_b("PairB");
+  eCAL::string::CSubscriber<std::string> sub_b("PairB");
+
+  int receive_a_count = 0;
+  int receive_b_count = 0;
+  std::string send_msg = "Hello World";
+  std::string receive_b_msg;
+
+  auto receive_a = [&receive_a_count, &pub_b](const char* /*topic_*/, const std::string& msg_, long long /*time_*/, long long /*clock_*/, long long /*id_*/) {
+    receive_a_count++;
+    pub_b.Send(msg_);
+  };
+
+  auto receive_b = [&receive_b_count, &receive_b_msg](const char* /*topic_*/, const std::string& msg_, long long /*time_*/, long long /*clock_*/, long long /*id_*/) {
+    receive_b_count++;
+    receive_b_msg = msg_;
+  };
+
+  sub_a.AddReceiveCallback(receive_a);
+  sub_b.AddReceiveCallback(receive_b);
+
+  bool isConnected = false;
+  while (!isConnected)
+  {
+    isConnected = sub_a.IsPublished() && sub_b.IsPublished();
+    std::this_thread::sleep_for(std::chrono::milliseconds(DATA_FLOW_TIME_MS));
+  }
+
+  pub_a.Send(send_msg);
+
+  std::this_thread::sleep_for(std::chrono::milliseconds(DATA_FLOW_TIME_MS));
+
+  EXPECT_NE(receive_a_count, 0);
+  EXPECT_EQ(receive_a_count, receive_b_count);
+  EXPECT_EQ(send_msg, receive_b_msg);
+
+  // finalize eCAL API
+  eCAL::Finalize();
+}
+
