@@ -6,13 +6,12 @@
 Performance measurements
 ========================
 
-The following table shows latencies for a 1:1 publish/subscribe connection for different payload sizes (the processes are running on the same host).
+The following table shows latencies for a 1:1 publish/subscribe connection for different payload sizes (the processes are running on the same host+.
 You can measure those latencies on your own computer by running the ecal_sample_latency_snd and ecal_sample_latency_rec sample applications.
 
 #. Start ``ecal_sample_latency_rec`` . This application will receive the published payloads, print out the number of the received messages, the latencies and the data throughputs.
 
 #. Start ``ecal_sample_latency_snd`` . This application will publish the payloads and can be configured via command line parameter:
-
 .. code-block:: console
 
    ecal_sample_latency_snd [-z] [-s <int>] [-r <int>] [-b <int>] [--]
